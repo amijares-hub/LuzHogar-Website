@@ -121,6 +121,8 @@ export default function ProductCard({ product, onAddToCart, onBuyNow, onQuickVie
         <button 
           onClick={toggleWishlist}
           className="absolute top-4 right-4 z-20 p-2 bg-white/80 backdrop-blur-md rounded-full text-titan-dark hover:bg-white transition-all shadow-md group/heart"
+          aria-label={isWishlisted ? "Quitar de lista de deseos" : "Añadir a lista de deseos"}
+          title={isWishlisted ? "Quitar de lista de deseos" : "Añadir a lista de deseos"}
         >
           <Heart className={cn(
             "h-4 w-4 transition-all duration-300",
@@ -216,22 +218,23 @@ export default function ProductCard({ product, onAddToCart, onBuyNow, onQuickVie
           </div>
         </div>
         
-        <h3 className="text-sm font-bold text-titan-dark group-hover:text-titan-orange transition-colors mb-4 line-clamp-1 uppercase tracking-tight">
+        <h3 className="text-xs md:text-sm font-bold text-titan-dark group-hover:text-titan-orange transition-colors mb-4 line-clamp-1 md:line-clamp-2 uppercase tracking-tight h-8 md:h-10">
           {product.name}
         </h3>
         {/* Quantity Selector */}
-        <div className="flex items-center justify-between mb-4 bg-white border-2 border-gray-100 rounded-full p-1 shadow-inner group/qty h-16 relative px-2">
+        {/* Quantity Selector - Compact on Mobile */}
+        <div className="flex items-center justify-between mb-4 bg-white border-2 border-gray-100 rounded-full p-1 shadow-inner group/qty h-12 md:h-16 relative px-2">
            <motion.button 
              whileHover={{ scale: 1.1, backgroundColor: "#f3f4f6", borderColor: "rgba(0,0,0,0.1)" }}
              whileTap={{ scale: 0.9 }}
              onClick={(e) => { e.stopPropagation(); setQuantity(prev => Math.max(1, prev - 1)); }}
-             className="w-12 h-12 flex items-center justify-center text-titan-dark border-2 border-gray-50 hover:border-gray-200 transition-all rounded-full shadow-sm"
+             className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-titan-dark border-2 border-gray-50 hover:border-gray-200 transition-all rounded-full shadow-sm"
            >
-             <Minus className="h-5 w-5" />
+             <Minus className="h-4 w-4 md:h-5 md:w-5" />
            </motion.button>
            
            <div className="flex flex-col items-center justify-center flex-1 relative h-full">
-             <span className="text-[7px] font-black uppercase text-titan-orange tracking-widest absolute -top-1 opacity-0 group-hover/qty:opacity-100 transition-all transform translate-y-2 group-hover/qty:translate-y-0">CANTIDAD</span>
+             <span className="hidden md:block text-[7px] font-black uppercase text-titan-orange tracking-widest absolute -top-1 opacity-0 group-hover/qty:opacity-100 transition-all transform translate-y-2 group-hover/qty:translate-y-0">CANTIDAD</span>
              <AnimatePresence mode="wait">
                <motion.span 
                  key={quantity}
@@ -239,7 +242,7 @@ export default function ProductCard({ product, onAddToCart, onBuyNow, onQuickVie
                  animate={{ y: 0, opacity: 1, scale: 1 }}
                  exit={{ y: -20, opacity: 0, scale: 0.5 }}
                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                 className="text-2xl font-black italic tracking-tighter text-titan-dark"
+                 className="text-lg md:text-2xl font-black italic tracking-tighter text-titan-dark"
                >
                  {quantity.toString().padStart(2, '0')}
                </motion.span>
@@ -251,9 +254,9 @@ export default function ProductCard({ product, onAddToCart, onBuyNow, onQuickVie
              whileHover={{ scale: 1.1, backgroundColor: "#fff7ed", borderColor: "rgba(249, 115, 22, 0.2)" }}
              whileTap={{ scale: 0.9 }}
              onClick={(e) => { e.stopPropagation(); setQuantity(prev => prev + 1); }}
-             className="w-12 h-12 flex items-center justify-center text-titan-orange border-2 border-gray-50 hover:border-titan-orange/20 transition-all rounded-full shadow-sm"
+             className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-titan-orange border-2 border-gray-50 hover:border-titan-orange/20 transition-all rounded-full shadow-sm"
            >
-             <Plus className="h-5 w-5" />
+             <Plus className="h-4 w-4 md:h-5 md:w-5" />
            </motion.button>
         </div>
 
@@ -271,19 +274,19 @@ export default function ProductCard({ product, onAddToCart, onBuyNow, onQuickVie
           Ver Detalles Completos
         </motion.button>
 
-        <div className="flex items-end justify-between mb-6 border-b border-gray-50 pb-4">
+        <div className="flex items-end justify-between mb-4 md:mb-6 border-b border-gray-50 pb-2 md:pb-4">
           <div className="flex flex-col">
             {product.originalPrice && product.originalPrice > product.price && (
-              <span className="text-xs text-gray-400 line-through tracking-tighter">
+              <span className="text-[10px] md:text-xs text-gray-400 line-through tracking-tighter">
                 ${product.originalPrice.toFixed(2)}
               </span>
             )}
-            <span className="text-2xl font-black text-titan-dark tracking-tighter italic">
+            <span className="text-lg md:text-2xl font-black text-titan-dark tracking-tighter italic">
               ${product.price.toFixed(2)}
             </span>
           </div>
           
-          <div className="flex flex-col items-end gap-1">
+          <div className="hidden sm:flex flex-col items-end gap-1">
              <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Entrega 24H</span>
              <div className="w-12 h-[3px] bg-titan-orange rounded-full" />
           </div>

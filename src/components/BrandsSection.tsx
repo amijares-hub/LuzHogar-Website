@@ -28,7 +28,7 @@ export default function BrandsSection() {
               <div className="absolute top-0 left-0 w-32 h-[1px] bg-titan-orange/30 -translate-y-8" />
               <div className="w-12 h-1 bg-titan-orange mb-8" />
               <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-titan-orange mb-6">Partners Estratégicos</h2>
-              <p className="text-4xl lg:text-7xl font-black tracking-tighter text-titan-dark uppercase italic leading-none">
+              <p className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-titan-dark uppercase italic leading-[0.85] md:leading-none">
                 MARCAS QUE <br />
                 <span className="text-gray-200">DISTRIBUIMOS</span>
               </p>

@@ -43,30 +43,35 @@ export default function CheckoutFlow({ onCancel, total }: CheckoutFlowProps) {
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Header */}
-      <div className="p-8 border-b border-gray-100 flex items-center justify-between shrink-0 bg-titan-light/30">
-        <button onClick={onCancel} className="p-2 -ml-2 text-titan-dark hover:text-titan-orange transition-colors">
-          <ArrowLeft className="h-6 w-6" />
+      <div className="p-4 md:p-8 border-b border-gray-100 flex items-center justify-between shrink-0 bg-titan-light/30">
+        <button 
+          onClick={onCancel} 
+          className="p-2 -ml-2 text-titan-dark hover:text-titan-orange transition-colors"
+          aria-label="Volver"
+          title="Volver"
+        >
+          <ArrowLeft className="h-5 w-5 md:h-6 md:w-6" />
         </button>
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 md:gap-8">
            {steps.map((s, i) => {
              const Icon = s.icon;
              const active = s.id === step;
              const finished = (step === 'payment' && s.id === 'shipping') || step === 'confirmation';
              return (
-               <div key={s.id} className="flex items-center gap-3">
+               <div key={s.id} className="flex items-center gap-2 md:gap-3">
                  <div className={cn(
-                   "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500",
-                   active ? "bg-titan-dark text-white scale-110 shadow-xl" : finished ? "bg-titan-orange text-white" : "bg-gray-100 text-gray-400"
+                   "w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-500",
+                   active ? "bg-titan-dark text-white scale-110 shadow-lg" : finished ? "bg-titan-orange text-white" : "bg-gray-100 text-gray-400"
                  )}>
-                   {finished && s.id !== step ? <CheckCircle className="h-4 w-4" /> : <Icon className="h-4 w-4" />}
+                   {finished && s.id !== step ? <CheckCircle className="h-3 w-3 md:h-4 md:w-4" /> : <Icon className="h-3 w-3 md:h-4 md:w-4" />}
                  </div>
-                 <span className={cn("text-[9px] font-black uppercase tracking-widest hidden md:block", active ? "text-titan-dark" : "text-gray-400")}>{s.label}</span>
-                 {i < steps.length - 1 && <div className="hidden md:block w-8 h-px bg-gray-100 mx-2" />}
+                 <span className={cn("text-[8px] md:text-[9px] font-black uppercase tracking-widest hidden sm:block", active ? "text-titan-dark" : "text-gray-400")}>{s.label}</span>
+                 {i < steps.length - 1 && <div className="hidden sm:block w-4 md:w-8 h-px bg-gray-100 mx-1 md:mx-2" />}
                </div>
              );
            })}
         </div>
-        <div className="w-10" /> {/* Spacer */}
+        <div className="w-8 md:w-10" /> {/* Spacer */}
       </div>
 
       {/* Content */}
@@ -87,38 +92,48 @@ export default function CheckoutFlow({ onCancel, total }: CheckoutFlowProps) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2 space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">Nombre Completo</label>
+                  <label htmlFor="checkout-name" className="text-[10px] font-black uppercase tracking-widest text-gray-400">Nombre Completo</label>
                   <input 
+                    id="checkout-name"
                     type="text" 
                     value={formData.name} 
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full bg-titan-light/50 border-none rounded-md p-4 text-[10px] font-black uppercase tracking-widest focus:ring-2 focus:ring-titan-orange transition-all" 
+                    placeholder="Tu nombre completo"
+                    title="Nombre Completo"
                   />
                 </div>
                 <div className="md:col-span-2 space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">Dirección 7 Islas</label>
+                  <label htmlFor="checkout-address" className="text-[10px] font-black uppercase tracking-widest text-gray-400">Dirección 7 Islas</label>
                   <div className="relative">
                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-titan-orange" />
                     <input 
+                      id="checkout-address"
                       type="text" 
                       value={formData.address} 
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       className="w-full bg-titan-light/50 border-none rounded-md p-4 pl-12 text-[10px] font-black uppercase tracking-widest focus:ring-2 focus:ring-titan-orange transition-all" 
+                      placeholder="Dirección completa"
+                      title="Dirección de envío"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">Ciudad / Isla</label>
+                  <label htmlFor="checkout-city" className="text-[10px] font-black uppercase tracking-widest text-gray-400">Ciudad / Isla</label>
                   <input 
+                    id="checkout-city"
                     type="text" 
                     value={formData.city} 
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                     className="w-full bg-titan-light/50 border-none rounded-md p-4 text-[10px] font-black uppercase tracking-widest focus:ring-2 focus:ring-titan-orange transition-all" 
+                    placeholder="Ciudad o Isla"
+                    title="Ciudad o Isla"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">Código Postal</label>
+                  <label htmlFor="checkout-zip" className="text-[10px] font-black uppercase tracking-widest text-gray-400">Código Postal</label>
                   <input 
+                    id="checkout-zip"
                     type="text" 
                     value={formData.zip} 
                     maxLength={5}
@@ -131,6 +146,8 @@ export default function CheckoutFlow({ onCancel, total }: CheckoutFlowProps) {
                       "w-full bg-titan-light/50 border-none rounded-md p-4 text-[10px] font-black uppercase tracking-widest focus:ring-2 transition-all",
                       zipError ? "ring-2 ring-red-500 bg-red-50" : "focus:ring-titan-orange"
                     )} 
+                    placeholder="CP"
+                    title="Código Postal"
                   />
                   <AnimatePresence>
                     {zipError && (

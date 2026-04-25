@@ -50,6 +50,12 @@ export default function FeaturedProducts({ onNavigate }: { onNavigate: (page: an
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="mb-16 text-center lg:text-left">
+          {/* Mobile Logo */}
+          <div className="md:hidden flex justify-center mb-8">
+            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-md border border-gray-100 shrink-0">
+              <img src="/luzhogar%20logo.jpg" alt="Luz Hogar Logo" className="w-[85%] h-[85%] object-contain" />
+            </div>
+          </div>
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-titan-orange">Selección Premium</span>
           <h2 className="text-4xl lg:text-6xl font-black tracking-tighter text-titan-dark uppercase mt-4 mb-6">Productos <span className="text-titan-orange">Destacados</span></h2>
           <p className="text-xs uppercase tracking-widest text-gray-400 font-bold max-w-xl">

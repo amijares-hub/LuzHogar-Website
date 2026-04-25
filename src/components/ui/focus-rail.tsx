@@ -140,7 +140,7 @@ export function FocusRail({
   return (
     <div
       className={cn(
-        "group relative flex h-[600px] w-full flex-col overflow-hidden bg-titan-orange text-white outline-none select-none overflow-x-hidden rounded-md",
+        "group relative flex min-h-[600px] md:min-h-[700px] py-10 w-full flex-col overflow-hidden bg-titan-orange text-white outline-none select-none overflow-x-hidden rounded-md",
         className
       )}
       onMouseEnter={() => setIsHovering(true)}
@@ -191,13 +191,14 @@ export function FocusRail({
             const dist = Math.abs(offset);
 
             // Dynamic transforms
-            const xOffset = offset * 320;
-            const zOffset = -dist * 180;
+            const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+            const xOffset = offset * (isMobile ? 180 : 320);
+            const zOffset = -dist * (isMobile ? 100 : 180);
             const scale = isCenter ? 1 : 0.85;
             const rotateY = offset * -20;
 
             const opacity = isCenter ? 1 : Math.max(0.1, 1 - dist * 0.5);
-            const blur = isCenter ? 0 : dist * 6;
+            const blur = isCenter ? 0 : dist * (isMobile ? 3 : 6);
             const brightness = isCenter ? 1 : 0.5;
 
             return (
@@ -243,8 +244,8 @@ export function FocusRail({
         </motion.div>
 
         {/* Info & Controls */}
-        <div className="mx-auto mt-12 flex w-full max-w-4xl flex-col items-center justify-between gap-6 md:flex-row pointer-events-auto">
-          <div className="flex flex-1 flex-col items-center text-center md:items-start md:text-left h-32 justify-center">
+        <div className="mx-auto mt-8 md:mt-12 flex w-full max-w-4xl flex-col items-center justify-between gap-6 md:flex-row pointer-events-auto">
+          <div className="flex flex-1 flex-col items-center text-center md:items-start md:text-left min-h-[140px] md:min-h-0 md:h-32 justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeItem.id}

@@ -82,9 +82,9 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
 
   return (
     <>
-      <div className="fixed top-0 z-[60] w-full bg-titan-orange py-2 text-center text-white">
-        <p className="text-[10px] font-black uppercase tracking-[0.2em]">
-          Venta exclusivamente en Canarias — <span className="italic">Porque somos de AQUÍ</span>
+      <div className="fixed top-0 z-[60] w-full bg-titan-orange py-2 text-center text-white overflow-hidden">
+        <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest md:tracking-[0.2em] px-2 leading-tight">
+          Venta exclusivamente en Canarias <span className="hidden md:inline">—</span> <br className="md:hidden" /> <span className="italic">Porque somos de AQUÍ</span>
         </p>
       </div>
       <nav className={cn(
@@ -98,9 +98,9 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
           <div className="flex items-center gap-12">
             <button 
               onClick={() => onNavigate?.('home')} 
-              className="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden hover:scale-110 transition-all shadow-md border border-gray-100"
+              className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center overflow-hidden hover:scale-110 transition-all shadow-md border border-gray-100 shrink-0"
             >
-              <img src="/luzhogar%20logo.jpg" alt="Luz Hogar Logo" className="w-full h-full object-contain" />
+              <img src="/luzhogar%20logo.jpg" alt="Luz Hogar Logo" className="w-[85%] h-[85%] object-contain" />
             </button>
             
           {/* Center: Desktop Row */}
@@ -135,22 +135,26 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
           </div>
 
           {/* Right: Icons */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 md:gap-6">
             {/* Spotlight Search Toggle */}
             <button 
               onClick={() => setIsSearchOpen(true)}
-              className="text-titan-dark hover:text-titan-orange transition-all p-2 rounded-full hover:bg-gray-100"
+              className="p-1 md:p-3 text-titan-dark hover:text-titan-orange transition-all relative group"
+              aria-label="Buscar productos"
+              title="Buscar productos (Cmd+K)"
             >
-              <Search className="h-5 w-5 stroke-[2]" />
+              <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
             </button>
 
             {/* Auth Menu */}
             <div className="relative">
               <button 
                 onClick={() => setIsAuthMenuOpen(!isAuthMenuOpen)}
-                className="text-titan-dark hover:text-titan-orange transition-colors"
+                className="p-1 md:p-3 text-titan-dark hover:text-titan-orange transition-all relative group"
+                aria-label="Mi Cuenta"
+                title="Mi Cuenta"
               >
-                <User className="h-5 w-5 stroke-[2]" />
+                <User className="h-5 w-5 group-hover:scale-110 transition-transform" />
               </button>
               
               <AnimatePresence>
@@ -216,7 +220,7 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
             {/* Cart Toggle */}
             <button 
               onClick={onOpenCart}
-              className="relative text-titan-dark hover:text-titan-orange transition-colors"
+              className="relative p-1 md:p-0 text-titan-dark hover:text-titan-orange transition-colors"
             >
               <ShoppingCart className="h-5 w-5 stroke-[2]" />
               {cartItemCount > 0 && (
@@ -243,23 +247,42 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 w-full bg-white border-b border-gray-100 md:hidden z-40 shadow-xl"
+              className="absolute top-full left-0 w-full bg-white border-b border-gray-100 md:hidden z-40 shadow-xl overflow-y-auto max-h-[80vh]"
             >
               <div className="flex flex-col p-8 space-y-6">
                 {desktopNavLinks.map((link, index) => (
                   <motion.button
                     key={link.name}
-                    onClick={() => { handleScrollToSection(link.section); setIsMobileMenuOpen(false); }}
+                    onClick={() => { 
+                      if (link.section === 'catalog') {
+                        onNavigate?.('catalog');
+                      } else {
+                        handleScrollToSection(link.section);
+                      }
+                      setIsMobileMenuOpen(false); 
+                    }}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     className={cn(
-                      "text-xl font-bold uppercase tracking-[0.2em] text-left text-titan-dark"
+                      "text-xl font-bold uppercase tracking-[0.1em] text-left text-titan-dark flex items-center gap-4"
                     )}
                   >
+                    <span className="text-titan-orange">{link.icon}</span>
                     {link.name}
                   </motion.button>
                 ))}
+                
+                <div className="pt-6 border-t border-gray-50 flex flex-col gap-4">
+                  <button className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+                    <Package className="h-5 w-5 text-titan-orange" />
+                    Rastrea tu pedido
+                  </button>
+                  <button className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+                    <MapPin className="h-5 w-5 text-titan-orange" />
+                    Dónde estamos
+                  </button>
+                </div>
               </div>
             </motion.div>
           )}
@@ -269,7 +292,7 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
       {/* Spotlight Search Modal */}
       <AnimatePresence>
         {isSearchOpen && (
-          <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]">
+          <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[5vh] md:pt-[15vh]">
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 

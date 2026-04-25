@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import CatalogPage from './components/CatalogPage';
@@ -25,7 +25,7 @@ import BackToTopButton from './components/BackToTopButton';
 import QuickViewModal from './components/QuickViewModal';
 import { LuzHogarProduct } from './mockData';
 import { Toaster, toast } from 'sonner';
-import { Scale } from 'lucide-react';
+import { Scale, ShoppingCart } from 'lucide-react';
 import { cn } from './lib/utils';
 import { GlassButton } from './components/ui/glass-button';
 import { Cta4 } from './components/ui/cta-4';
@@ -42,6 +42,10 @@ export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([
     { id: 1, name: 'Smart TV LG 55\'\' 4K UHD', price: 459.50, quantity: 1, image: 'https://images.unsplash.com/photo-1593359677770-4669502a35b0?auto=format&fit=crop&q=80&w=600', variant: 'Standard' },
   ]);
+  
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   const handleUpdateQuantity = (id: number, delta: number) => {
     setCartItems(prev => prev.map(item => 
@@ -166,32 +170,32 @@ export default function App() {
               <TestimonialsSection />
             </div>
             
-            <section className="py-24 bg-titan-light">
+            <section className="py-16 md:py-24 bg-titan-light">
               <div className="max-w-7xl mx-auto px-6 lg:px-10">
-                <div className="flex flex-col lg:flex-row items-center gap-16">
-                  <div className="flex-1 text-center lg:text-left">
-                    <h2 className="text-4xl lg:text-7xl font-black tracking-tighter text-titan-dark uppercase mb-8 leading-none">
-                      OFERTAS <span className="text-titan-orange">IRRESISTIBLES</span> <br />
+                <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-16">
+                   <div className="w-full lg:flex-1 text-center lg:text-left order-2 lg:order-1">
+                    <h2 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-titan-dark uppercase mb-4 md:mb-8 leading-[0.9] md:leading-none">
+                      OFERTAS <span className="text-titan-orange">IRRESISTIBLES</span> <br className="hidden md:block" />
                       SÓLO ESTA SEMANA.
                     </h2>
-                    <p className="text-gray-500 text-sm uppercase tracking-widest leading-loose mb-10 max-w-lg font-bold">
+                    <p className="text-gray-500 text-[11px] md:text-sm uppercase tracking-widest leading-relaxed md:leading-loose mb-8 md:mb-10 max-w-lg font-bold mx-auto lg:mx-0">
                       ¡No te lo pierdas! Renueva tu hogar con precios de fábrica. Envíos inmediatos a todas las islas. ¡Últimas unidades!
                     </p>
                     <button 
                       onClick={() => setCurrentPage('catalog')}
-                      className="bg-titan-orange text-white px-10 py-5 rounded-md text-[11px] font-black uppercase tracking-[0.3em] hover:bg-titan-orange-hover transition-all shadow-xl hover:scale-105 active:scale-95"
+                      className="w-full md:w-auto bg-titan-orange text-white px-10 py-5 rounded-md text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-titan-orange-hover transition-all shadow-xl hover:scale-105 active:scale-95"
                     >
                       ¡Comprar Ahora!
                     </button>
                   </div>
-                  <div className="flex-1 relative aspect-square bg-white overflow-hidden border border-gray-100 rounded-md shadow-sm">
+                  <div className="w-full lg:flex-1 relative aspect-[4/3] md:aspect-square bg-white overflow-hidden border border-gray-100 rounded-md shadow-sm order-1 lg:order-2">
                     <img 
                       src="/mesa-gaming-pro1500-xl-fibra-carbono-luz-rgb-sound-muvip.jpg" 
                       alt="Luz Hogar Evolution" 
                       className="w-full h-full object-cover grayscale active:grayscale-0 transition-all duration-1000" 
                       loading="lazy" 
                     />
-                    <div className="absolute top-8 right-8 bg-titan-orange p-4 rounded-full animate-pulse shadow-lg" />
+                    <div className="absolute top-4 right-4 md:top-8 md:right-8 bg-titan-orange p-3 md:p-4 rounded-full animate-pulse shadow-lg" />
                   </div>
                 </div>
               </div>
@@ -336,8 +340,8 @@ export default function App() {
         onToggle={() => setIsComparisonOpen(!isComparisonOpen)}
       />
       
-      {/* Large Sidebar Navigation Button */}
-      <div className="fixed top-1/2 -translate-y-1/2 left-4 z-[200]">
+      {/* Large Sidebar Navigation Button - Hidden on mobile */}
+      <div className="hidden md:block fixed top-1/2 -translate-y-1/2 left-4 z-[200]">
          <GlassButton 
            variant="orange"
            onClick={() => setCurrentPage('catalog')} 
@@ -353,6 +357,17 @@ export default function App() {
              currentPage === 'catalog' ? "bg-white animate-pulse" : "bg-white/50"
            )} />
          </GlassButton>
+      </div>
+
+      {/* Mobile Floating Action Button for Catalog */}
+      <div className="md:hidden fixed bottom-6 right-6 z-[200]">
+        <GlassButton 
+          variant="orange"
+          onClick={() => setCurrentPage('catalog')}
+          className="rounded-full w-14 h-14 flex items-center justify-center shadow-2xl shadow-titan-orange/40"
+        >
+          <ShoppingCart className="h-6 w-6 text-white" />
+        </GlassButton>
       </div>
     </div>
   );

@@ -98,21 +98,21 @@ export const GradientCard = ({ className, gradient, badgeText, badgeColor, title
         </motion.div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col h-full" style={{ transform: "translateZ(30px)" }}>
+        <div className="relative z-10 flex flex-col h-full [transform:translateZ(30px)]">
           {/* Badge */}
           <div 
-            className="mb-6 inline-flex items-center rounded-full px-4 py-1 text-[9px] font-black uppercase tracking-[0.3em] text-white border border-white/20 w-fit shadow-lg shadow-black/50"
-            style={{ backgroundColor: badgeColor }}
+            className="mb-4 md:mb-6 inline-flex items-center rounded-full px-3 md:px-4 py-1 text-[8px] md:text-[9px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-white border border-white/20 w-fit shadow-lg shadow-black/50 bg-[var(--badge-bg)]"
+            style={{ '--badge-bg': badgeColor } as React.CSSProperties}
           >
             {badgeText}
           </div>
 
           {/* Title and Description */}
           <div className="flex-grow">
-            <h3 className="text-4xl lg:text-5xl font-black text-white mb-4 uppercase tracking-tighter italic leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50 transition-all duration-500">
+            <h3 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 uppercase tracking-tighter italic leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50 transition-all duration-500">
               {title}
             </h3>
-            <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] max-w-[240px] leading-relaxed group-hover:text-gray-300 transition-colors">
+            <p className="text-[9px] md:text-[11px] font-black text-gray-400 uppercase tracking-[0.1em] md:tracking-[0.2em] max-w-[140px] md:max-w-[240px] leading-relaxed group-hover:text-gray-300 transition-colors">
               {description}
             </p>
           </div>
@@ -120,12 +120,12 @@ export const GradientCard = ({ className, gradient, badgeText, badgeColor, title
           {/* Call to Action */}
           <motion.div
             whileHover={{ x: 10 }}
-            className="group mt-auto inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.4em] text-titan-orange hover:text-white transition-all cursor-pointer"
+            className="group mt-auto inline-flex items-center gap-2 md:gap-4 text-[9px] md:text-[11px] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-titan-orange hover:text-white transition-all cursor-pointer"
           >
-            <div className="h-[2px] w-8 bg-titan-orange group-hover:w-16 transition-all duration-500" />
+            <div className="h-[2px] w-4 md:w-8 bg-titan-orange group-hover:w-16 transition-all duration-500" />
             {ctaText}
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-titan-orange text-white shadow-[0_0_15px_rgba(242,130,36,0.3)] group-hover:bg-white group-hover:text-titan-orange transition-all duration-500">
-              <ArrowRight className="h-4 w-4 stroke-[3]" />
+            <div className="flex h-6 w-6 md:h-8 md:w-8 items-center justify-center rounded-full bg-titan-orange text-white shadow-[0_0_15px_rgba(242,130,36,0.3)] group-hover:bg-white group-hover:text-titan-orange transition-all duration-500">
+              <ArrowRight className="h-3 w-3 md:h-4 md:w-4 stroke-[3]" />
             </div>
           </motion.div>
         </div>

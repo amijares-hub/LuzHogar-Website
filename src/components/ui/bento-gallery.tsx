@@ -300,14 +300,16 @@ const InteractiveImageBentoGallery: React.FC<
     >
       <motion.div
         style={{ opacity: sectionOpacity, y: sectionY }}
-        className="container mx-auto px-4 text-center"
+        className="container mx-auto px-4"
       >
-        <h2 id="gallery-title" className="text-3xl lg:text-6xl font-black tracking-tight text-foreground sm:text-4xl uppercase">
-          {title}
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">
-          {description}
-        </p>
+        <div className="mb-10 md:mb-16 text-center lg:text-left">
+          <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] text-titan-orange">Selección Premium</span>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-titan-dark uppercase mt-3 md:mt-4 mb-4 md:mb-6 leading-tight">Productos <span className="text-titan-orange">Destacados</span></h2>
+          <p className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400 font-bold max-w-xl mx-auto lg:mx-0">
+            Navega por nuestra selección de élite en electrodomésticos diseñados para durar. 
+            Calidad industrial para tu hogar en Canarias.
+          </p>
+        </div>
       </motion.div>
 
       <div
@@ -322,23 +324,15 @@ const InteractiveImageBentoGallery: React.FC<
           dragConstraints={{ left: dragConstraint, right: 0 }}
           dragElastic={0.05}
         >
-          <motion.div
-            ref={gridRef}
-            className={cn("grid auto-cols-[minmax(15rem,1fr)] grid-flow-col px-4 md:px-8")}
-            style={{ gap: `${gap * 0.25}rem` }}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            {imageItems.map((item) => (
-              <motion.div
-                key={item.id}
-                variants={itemVariants}
-                className={cn(
-                  "group relative flex h-full min-h-[22rem] w-full min-w-[22rem] cursor-pointer items-end overflow-hidden rounded-xl border bg-card p-6 shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-titan-orange focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                  item.span,
-                )}
+                <div className="grid grid-cols-1 auto-cols-[minmax(18rem,1fr)] grid-flow-col px-4 md:px-8 px-4 md:px-8">
+                  {imageItems.map((item) => (
+                    <motion.div
+                      key={item.id}
+                      variants={itemVariants}
+                      className={cn(
+                        "group relative flex h-full min-h-[20rem] w-full min-w-[18rem] md:min-w-[22rem] cursor-pointer items-end overflow-hidden rounded-xl border bg-card p-6 shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-titan-orange focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                        item.span,
+                      )}
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 onClick={() => setSelectedItem(item)}
@@ -364,9 +358,9 @@ const InteractiveImageBentoGallery: React.FC<
                 </div>
               </motion.div>
             ))}
+                </div>
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
 
       <AnimatePresence>
         {selectedItem && (

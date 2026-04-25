@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           {/* Logo & Bio */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
@@ -16,13 +16,25 @@ export default function Footer() {
               Líderes en Canarias. Los mejores electrodomésticos con los precios más bajos del mercado. Garantía total y envío inmediato. ¡Equipa tu hogar hoy mismo!
             </p>
             <div className="flex gap-4">
-              <button className="p-2 bg-titan-light border border-gray-100 rounded-full hover:bg-titan-orange hover:text-white transition-all">
+              <button 
+                className="p-2 bg-titan-light border border-gray-100 rounded-full hover:bg-titan-orange hover:text-white transition-all"
+                aria-label="Instagram"
+                title="Siguenos en Instagram"
+              >
                 <Instagram className="h-4 w-4" />
               </button>
-              <button className="p-2 bg-titan-light border border-gray-100 rounded-full hover:bg-titan-orange hover:text-white transition-all">
+              <button 
+                className="p-2 bg-titan-light border border-gray-100 rounded-full hover:bg-titan-orange hover:text-white transition-all"
+                aria-label="Twitter"
+                title="Siguenos en Twitter"
+              >
                 <Twitter className="h-4 w-4" />
               </button>
-              <button className="p-2 bg-titan-light border border-gray-100 rounded-full hover:bg-titan-orange hover:text-white transition-all">
+              <button 
+                className="p-2 bg-titan-light border border-gray-100 rounded-full hover:bg-titan-orange hover:text-white transition-all"
+                aria-label="Youtube"
+                title="Siguenos en Youtube"
+              >
                 <Youtube className="h-4 w-4" />
               </button>
             </div>
@@ -61,7 +73,11 @@ export default function Footer() {
                 placeholder="EMAIL PROFESIONAL" 
                 className="bg-transparent border-none focus:ring-0 text-titan-dark p-3 text-[10px] flex-1 font-bold placeholder:text-gray-300"
               />
-              <button className="bg-titan-orange text-white p-3 hover:bg-titan-orange-hover transition-all rounded-sm shadow-sm">
+              <button 
+                className="bg-titan-orange text-white p-3 hover:bg-titan-orange-hover transition-all rounded-sm shadow-sm"
+                aria-label="Suscribirse"
+                title="Suscribirse a la newsletter"
+              >
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>

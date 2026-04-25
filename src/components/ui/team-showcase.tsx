@@ -254,7 +254,14 @@ function BrandRow({
           
           <div className="w-px h-4 bg-gray-200 mx-1" />
           
-          <a href={brand.url} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-titan-light text-titan-dark hover:bg-titan-orange hover:text-white transition-all shadow-sm">
+          <a 
+            href={brand.url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="p-2 rounded-full bg-titan-light text-titan-dark hover:bg-titan-orange hover:text-white transition-all shadow-sm"
+            aria-label={`Visitar sitio web de ${brand.name}`}
+            title="Visitar Sitio Web"
+          >
             <Globe size={14} />
           </a>
         </div>

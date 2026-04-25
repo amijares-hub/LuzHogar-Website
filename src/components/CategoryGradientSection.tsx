@@ -56,17 +56,17 @@ export default function CategoryGradientSection({ onNavigate }: CategoryGradient
       <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
 
 
-        <div className="mb-20 text-center lg:text-left">
+        <div className="mb-12 md:mb-20 text-center lg:text-left">
           <div className="flex items-center gap-4 mb-6 justify-center lg:justify-start">
             <div className="h-[1px] w-12 bg-titan-orange" />
-            <h2 className="text-[10px] font-black uppercase tracking-[0.6em] text-titan-orange">Explora por Categoría</h2>
+            <h2 className="text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.6em] text-titan-orange">Explora por Categoría</h2>
           </div>
-          <p className="text-5xl lg:text-8xl font-black tracking-tighter text-titan-orange uppercase italic leading-none">
+          <p className="text-3xl md:text-5xl lg:text-8xl font-black tracking-tighter text-titan-orange uppercase italic leading-[0.9]">
             SECCIONES ESTRATÉGICAS
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
           {categories.map((cat, index) => (
             <motion.div
               key={index}

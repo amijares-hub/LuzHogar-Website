@@ -85,8 +85,8 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
     <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
         {/* Left: Gallery */}
-        <div className="space-y-6 lg:sticky lg:top-32 h-fit">
-          <div className="relative aspect-[4/5] bg-titan-light border border-gray-100 rounded-md overflow-hidden group/gallery">
+        <div className="space-y-4 md:space-y-6 lg:sticky lg:top-32 h-fit">
+          <div className="relative aspect-square md:aspect-[4/5] bg-titan-light border border-gray-100 rounded-md overflow-hidden group/gallery">
             <motion.div 
               className="flex h-full cursor-grab active:cursor-grabbing"
               drag="x"
@@ -102,20 +102,20 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
             >
               <AnimatePresence mode="wait">
                 <motion.img 
-                  key={selectedImage}
-                  src={images[selectedImage]} 
-                  alt="Titan Product" 
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 pointer-events-none" 
-                  loading="lazy" 
+                   key={selectedImage}
+                   src={images[selectedImage]} 
+                   alt="Titan Product" 
+                   initial={{ opacity: 0, x: 20 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   exit={{ opacity: 0, x: -20 }}
+                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 pointer-events-none" 
+                   loading="lazy" 
                 />
               </AnimatePresence>
             </motion.div>
 
-            {/* Navigation Arrows */}
-            <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
+            {/* Navigation Arrows - Hidden on mobile as swipe is preferred */}
+            <div className="hidden md:flex absolute inset-x-4 top-1/2 -translate-y-1/2 justify-between pointer-events-none">
               <button 
                 onClick={() => setSelectedImage(Math.max(0, selectedImage - 1))}
                 disabled={selectedImage === 0}
@@ -123,6 +123,8 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
                   "p-3 rounded-full bg-white/80 backdrop-blur-md text-titan-dark shadow-xl transition-all pointer-events-auto",
                   selectedImage === 0 ? "opacity-0 invisible" : "opacity-0 group-hover/gallery:opacity-100"
                 )}
+                aria-label="Imagen anterior"
+                title="Imagen anterior"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -133,32 +135,34 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
                   "p-3 rounded-full bg-white/80 backdrop-blur-md text-titan-dark shadow-xl transition-all pointer-events-auto",
                   selectedImage === images.length - 1 ? "opacity-0 invisible" : "opacity-0 group-hover/gallery:opacity-100"
                 )}
+                aria-label="Siguiente imagen"
+                title="Siguiente imagen"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
             </div>
 
             {/* Indicator */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+            <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
                {images.map((_, i) => (
                  <div 
                    key={i} 
                    className={cn(
-                     "h-1.5 transition-all rounded-full",
-                     selectedImage === i ? "w-8 bg-titan-orange" : "w-1.5 bg-white/50"
+                     "h-1 md:h-1.5 transition-all rounded-full",
+                     selectedImage === i ? "w-6 md:w-8 bg-titan-orange" : "w-1 md:w-1.5 bg-white/50"
                    )} 
                  />
                ))}
             </div>
           </div>
           
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-3 md:gap-4 overflow-x-auto pb-2 scrollbar-hide">
             {images.map((img, i) => (
               <button 
                 key={i}
                 onClick={() => setSelectedImage(i)}
                 className={cn(
-                  "w-24 h-24 shrink-0 border transition-all duration-300 bg-titan-light rounded-md overflow-hidden",
+                  "w-16 h-16 md:w-24 md:h-24 shrink-0 border transition-all duration-300 bg-titan-light rounded-md overflow-hidden",
                   selectedImage === i ? "border-titan-orange scale-95" : "border-gray-100 opacity-60 hover:opacity-100"
                 )}
               >
@@ -176,8 +180,8 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
               <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">(128 Reseñas)</span>
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-black tracking-tighter text-titan-dark uppercase mb-6 leading-none">
-              Titan Core <br />
+            <h1 className="text-3xl md:text-4xl lg:text-6xl font-black tracking-tighter text-titan-dark uppercase mb-4 md:mb-6 leading-none">
+              Titan Core <br className="hidden md:block" />
               <span className="text-titan-orange italic font-serif font-light tracking-tight">L01 Hybrid</span>
             </h1>
 
@@ -208,8 +212,10 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
                       "w-10 h-10 rounded-full border-2 transition-all p-0.5",
                       selectedColor === color.id ? "border-titan-orange scale-110" : "border-gray-200 hover:border-gray-400"
                     )}
+                    aria-label={`Seleccionar color ${color.name}`}
+                    title={color.name}
                   >
-                    <div className="w-full h-full rounded-full" style={{ background: color.hex }} />
+                    <div className="w-full h-full rounded-full bg-[var(--color-dot)]" style={{ '--color-dot': color.hex } as React.CSSProperties} />
                   </button>
                 ))}
               </div>
@@ -217,13 +223,13 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
 
             <div>
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-6">Configuración: <span className="text-titan-dark ml-2">{selectedSize.toUpperCase()}</span></p>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 {sizes.map(size => (
                   <button 
                     key={size}
                     onClick={() => setSelectedSize(size)}
                     className={cn(
-                      "px-6 py-3 border rounded-md text-[11px] font-black uppercase tracking-widest transition-all",
+                      "flex-1 md:flex-none px-6 py-4 md:py-3 border rounded-md text-[10px] md:text-[11px] font-black uppercase tracking-widest transition-all",
                       selectedSize === size ? "border-titan-orange bg-titan-orange text-white" : "border-gray-200 text-gray-400 hover:border-gray-400"
                     )}
                   >
@@ -235,18 +241,22 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
           </div>
 
           {/* Quantity and CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <div className="flex items-center gap-6 bg-titan-light border border-gray-100 p-4 shrink-0 rounded-md shadow-sm">
+          <div className="flex flex-col sm:flex-row gap-4 mb-6 md:mb-12">
+            <div className="flex items-center justify-between md:justify-center gap-6 bg-titan-light border border-gray-100 p-4 shrink-0 rounded-md shadow-sm">
               <button 
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="text-gray-400 hover:text-titan-dark transition-colors"
+                className="p-2 text-gray-400 hover:text-titan-dark transition-colors"
+                aria-label="Disminuir cantidad"
+                title="Disminuir cantidad"
               >
                 <Minus className="h-5 w-5" />
               </button>
               <span className="text-xl font-black text-titan-dark w-8 text-center">{quantity}</span>
               <button 
                 onClick={() => setQuantity(quantity + 1)}
-                className="text-gray-400 hover:text-titan-dark transition-colors"
+                className="p-2 text-gray-400 hover:text-titan-dark transition-colors"
+                aria-label="Aumentar cantidad"
+                title="Aumentar cantidad"
               >
                 <Plus className="h-5 w-5" />
               </button>
@@ -254,13 +264,13 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
             
             <button 
               onClick={handleAddToCart}
-              className="flex-1 bg-titan-orange text-white p-5 rounded-md text-[11px] font-black uppercase tracking-[0.3em] hover:bg-titan-orange-hover transition-all flex items-center justify-center gap-3 shadow-md"
+              className="flex-1 bg-titan-orange text-white p-5 rounded-md text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-titan-orange-hover transition-all flex items-center justify-center gap-3 shadow-md"
             >
               <ShoppingBag className="h-4 w-4" /> Añadir al carrito
             </button>
           </div>
 
-          <button className="w-full bg-titan-dark text-white p-5 rounded-md text-[11px] font-black uppercase tracking-[0.3em] hover:bg-black transition-all flex items-center justify-center gap-3 mb-16 shadow-md">
+          <button className="w-full bg-titan-dark text-white p-5 rounded-md text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-black transition-all flex items-center justify-center gap-3 mb-10 md:mb-16 shadow-md">
              Pagar con <span className="font-sans italic">Apple Pay</span>
           </button>
 

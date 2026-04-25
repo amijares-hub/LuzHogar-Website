@@ -34,18 +34,18 @@ export const Cta4 = ({
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex justify-center">
           <div className="w-full">
-            <div className="flex flex-col items-start justify-between gap-12 rounded-3xl bg-titan-light/50 border border-titan-orange/5 px-8 py-12 md:flex-row lg:px-20 lg:py-20 shadow-2xl shadow-titan-orange/5">
-              <div className="md:w-3/5">
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-titan-orange mb-4 block">Confianza Canaria</span>
-                <h2 className="mb-6 text-4xl lg:text-6xl font-black tracking-tighter text-titan-dark uppercase italic leading-none">
+            <div className="flex flex-col items-start justify-between gap-12 rounded-3xl bg-titan-light/50 border border-titan-orange/5 px-6 py-10 md:px-8 md:py-12 md:flex-row lg:px-20 lg:py-20 shadow-2xl shadow-titan-orange/5">
+              <div className="w-full md:w-3/5">
+                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] text-titan-orange mb-3 md:mb-4 block">Confianza Canaria</span>
+                <h2 className="mb-4 md:mb-6 text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-titan-dark uppercase italic leading-none">
                   {title}
                 </h2>
-                <p className="text-gray-500 text-sm uppercase tracking-widest leading-loose mb-10 max-w-lg">
+                <p className="text-gray-500 text-[11px] md:text-sm uppercase tracking-widest leading-relaxed md:leading-loose mb-8 md:mb-10 max-w-lg">
                   {description}
                 </p>
                 <Button 
                   onClick={onButtonClick}
-                  className="bg-titan-orange text-white px-10 py-7 rounded-md text-[11px] font-black uppercase tracking-[0.3em] hover:bg-titan-orange-hover transition-all shadow-xl shadow-titan-orange/20"
+                  className="w-full md:w-auto bg-titan-orange text-white px-8 md:px-10 py-5 md:py-7 rounded-md text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-titan-orange-hover transition-all shadow-xl shadow-titan-orange/20"
                 >
                   {buttonText} <ArrowRight className="ml-2 size-4" />
                 </Button>
