@@ -24,6 +24,7 @@ export const cardVariants = cva(
 );
 
 export interface GradientCardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
+  className?: string;
   badgeText: string;
   badgeColor: string;
   title: string;
@@ -102,7 +103,7 @@ export const GradientCard = ({ className, gradient, badgeText, badgeColor, title
           {/* Badge */}
           <div 
             className="mb-4 md:mb-6 inline-flex items-center rounded-full px-3 md:px-4 py-1 text-[8px] md:text-[9px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-white border border-white/20 w-fit shadow-lg shadow-black/50 bg-[var(--badge-bg)]"
-            style={{ '--badge-bg': badgeColor } as React.CSSProperties}
+            {...{ style: { '--badge-bg': badgeColor } as React.CSSProperties }}
           >
             {badgeText}
           </div>

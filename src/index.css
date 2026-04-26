@@ -27,6 +27,15 @@
   }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% - var(--gap))); }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -34,16 +43,22 @@
   }
 
   body {
-    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+    background-color: var(--color-gray-50, #f9fafb);
+    color: var(--color-gray-900, #111827);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply text-gray-900 font-black tracking-tight;
+    color: var(--color-gray-900, #111827);
+    font-weight: 900;
+    letter-spacing: -0.025em;
   }
 
   p {
-    @apply text-gray-600;
+    color: var(--color-gray-600, #4b5563);
   }
 }
 
@@ -53,7 +68,11 @@
   }
   .scrollbar-hide {
     -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  }
+  @supports (scrollbar-width: none) {
+    .scrollbar-hide {
+      scrollbar-width: none; /* Firefox */
+    }
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Chrome, Safari and Opera */
@@ -82,8 +101,8 @@
 
   .glass-button {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     color: var(--glass-text);
     box-shadow: 0 4px 12px var(--glass-shadow);

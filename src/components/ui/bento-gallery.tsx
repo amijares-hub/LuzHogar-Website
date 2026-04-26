@@ -177,9 +177,9 @@ const ImageModal = ({
           
           <div className="flex items-center justify-center gap-4">
              <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full border border-white/5">
-                <button onClick={() => setZoom(prev => Math.max(1, prev - 0.25))} className="p-1 text-white hover:text-titan-orange transition-colors"><ZoomOut size={14} /></button>
+                <button title="Reducir zoom" onClick={() => setZoom(prev => Math.max(1, prev - 0.25))} className="p-1 text-white hover:text-titan-orange transition-colors"><ZoomOut size={14} /></button>
                 <span className="text-[10px] font-black text-white w-8">{Math.round(zoom * 100)}%</span>
-                <button onClick={() => setZoom(prev => Math.min(4, prev + 0.25))} className="p-1 text-white hover:text-titan-orange transition-colors"><ZoomIn size={14} /></button>
+                <button title="Aumentar zoom" onClick={() => setZoom(prev => Math.min(4, prev + 0.25))} className="p-1 text-white hover:text-titan-orange transition-colors"><ZoomIn size={14} /></button>
              </div>
              
              {onAddToCart && (
@@ -350,7 +350,7 @@ const InteractiveImageBentoGallery: React.FC<
                 </div>
                 <div 
                   className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 group-hover:opacity-100" 
-                  style={{ opacity: overlayOpacity }}
+                  {...{ style: { opacity: overlayOpacity } }}
                 />
                 <div className="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                   <h3 className="text-xl font-black text-white uppercase tracking-tighter">{item.title}</h3>

@@ -29,6 +29,7 @@ import { Scale, ShoppingCart } from 'lucide-react';
 import { cn } from './lib/utils';
 import { GlassButton } from './components/ui/glass-button';
 import { Cta4 } from './components/ui/cta-4';
+import { HeroWithMarquee } from './components/ui/cta-with-marquee';
 
 type Page = 'home' | 'catalog' | 'pdp' | 'terms' | 'privacy' | 'admin' | 'account';
 
@@ -149,10 +150,11 @@ export default function App() {
           >
             <HeroSection onNavigate={setCurrentPage} />
             <Cta4 onButtonClick={() => setCurrentPage('catalog')} />
+            <HeroWithMarquee onNavigate={setCurrentPage} />
             <div id="ofertas-section">
               <FeaturedProducts onNavigate={setCurrentPage} />
             </div>
-            <ApplianceShowcaseGrid onAddToCart={handleAddToCart} />
+
             <div id="nosotros-section">
               <AnimatedHeroSection onNavigate={setCurrentPage} />
             </div>
@@ -341,34 +343,23 @@ export default function App() {
         onToggle={() => setIsComparisonOpen(!isComparisonOpen)}
       />
       
-      {/* Large Sidebar Navigation Button - Hidden on mobile */}
-      <div className="hidden md:block fixed top-1/2 -translate-y-1/2 left-4 z-[200]">
+      {/* Sidebar Navigation Button - Visible on both PC and mobile */}
+      <div className="fixed top-1/2 -translate-y-1/2 left-0 md:left-4 z-[200]">
          <GlassButton 
            variant="orange"
            onClick={() => setCurrentPage('catalog')} 
            className={cn(
-             "transition-all [writing-mode:vertical-lr] rotate-180 flex items-center justify-center gap-4 py-8",
-             currentPage === 'catalog' ? 'scale-110 shadow-[0_0_30px_rgba(242,130,36,0.5)]' : 'opacity-80 hover:opacity-100'
+             "transition-all [writing-mode:vertical-lr] rotate-180 flex items-center justify-center gap-2 md:gap-4 py-6 md:py-8 !rounded-r-xl !rounded-l-none md:!rounded-full",
+             currentPage === 'catalog' ? 'scale-105 md:scale-110 shadow-[0_0_30px_rgba(242,130,36,0.5)]' : 'opacity-90 md:opacity-80 hover:opacity-100'
            )}
-           contentClassName="flex items-center gap-4"
+           contentClassName="flex items-center gap-2 md:gap-4"
          >
-           <span className="tracking-[0.5em] font-black italic">CATÁLOGO</span>
+           <span className="tracking-[0.3em] md:tracking-[0.5em] font-black italic text-[10px] md:text-sm">CATÁLOGO</span>
            <div className={cn(
-             "h-2 w-2 rounded-full",
+             "h-1.5 w-1.5 md:h-2 md:w-2 rounded-full",
              currentPage === 'catalog' ? "bg-white animate-pulse" : "bg-white/50"
            )} />
          </GlassButton>
-      </div>
-
-      {/* Mobile Floating Action Button for Catalog */}
-      <div className="md:hidden fixed bottom-6 right-6 z-[200]">
-        <GlassButton 
-          variant="orange"
-          onClick={() => setCurrentPage('catalog')}
-          className="rounded-full w-14 h-14 flex items-center justify-center shadow-2xl shadow-titan-orange/40"
-        >
-          <ShoppingCart className="h-6 w-6 text-white" />
-        </GlassButton>
       </div>
     </div>
   );

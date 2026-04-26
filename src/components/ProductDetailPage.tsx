@@ -215,7 +215,7 @@ export default function ProductDetailPage({ onAddToCart, onBuyNow, onQuickView }
                     aria-label={`Seleccionar color ${color.name}`}
                     title={color.name}
                   >
-                    <div className="w-full h-full rounded-full bg-[var(--color-dot)]" style={{ '--color-dot': color.hex } as React.CSSProperties} />
+                    <div className="w-full h-full rounded-full bg-[var(--color-dot)]" {...{ style: { '--color-dot': color.hex } as React.CSSProperties }} />
                   </button>
                 ))}
               </div>

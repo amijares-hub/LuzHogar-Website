@@ -62,7 +62,7 @@ export default function CategoryGradientSection({ onNavigate }: CategoryGradient
             <h2 className="text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.6em] text-titan-orange">Explora por Categoría</h2>
           </div>
           <p className="text-3xl md:text-5xl lg:text-8xl font-black tracking-tighter text-titan-orange uppercase italic leading-[0.9]">
-            SECCIONES ESTRATÉGICAS
+            ENCUENTRA LO QUE ESTÁS BUSCANDO
           </p>
         </div>
         
