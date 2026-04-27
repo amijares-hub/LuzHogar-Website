@@ -149,8 +149,8 @@ export default function App() {
             className="w-full relative overflow-x-hidden"
           >
             <HeroSection onNavigate={setCurrentPage} />
-            <Cta4 onButtonClick={() => setCurrentPage('catalog')} />
             <HeroWithMarquee onNavigate={setCurrentPage} />
+            <Cta4 onButtonClick={() => setCurrentPage('catalog')} />
             <div id="ofertas-section">
               <FeaturedProducts onNavigate={setCurrentPage} />
             </div>
