@@ -45,7 +45,7 @@ export default function App() {
   ]);
   
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }, [currentPage]);
 
   const handleUpdateQuantity = (id: number, delta: number) => {
@@ -100,7 +100,7 @@ export default function App() {
   const handleNavigateToPDP = (product: LuzHogarProduct) => {
     addToRecentlyViewed(product);
     setCurrentPage('pdp');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   const handleAddToCompare = (product: LuzHogarProduct) => {
