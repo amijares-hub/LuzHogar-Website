@@ -42,11 +42,13 @@ const SUBCATEGORIES: Record<string, { name: string; image: string }[]> = {
   ]
 };
 
-export default function CatalogPage({ onAddToCart, onBuyNow, onQuickView, onCompare, onClick }: { onAddToCart: (product: LuzHogarProduct, quantity?: number) => void, onBuyNow?: (product: LuzHogarProduct, quantity?: number) => void, onQuickView?: (product: LuzHogarProduct) => void, onCompare?: (product: LuzHogarProduct) => void, onClick?: (product: LuzHogarProduct) => void }) {
+export default function CatalogPage({ onAddToCart, onBuyNow, onQuickView, onCompare, onClick, initialCategory }: { onAddToCart: (product: LuzHogarProduct, quantity?: number) => void, onBuyNow?: (product: LuzHogarProduct, quantity?: number) => void, onQuickView?: (product: LuzHogarProduct) => void, onCompare?: (product: LuzHogarProduct) => void, onClick?: (product: LuzHogarProduct) => void, initialCategory?: string | null }) {
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const [expandedFilters, setExpandedFilters] = useState<string[]>(['categories']);
   const [showOnlyInStock, setShowOnlyInStock] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    initialCategory ? [initialCategory] : []
+  );
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedEnergyClasses, setSelectedEnergyClasses] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<number>(1000);

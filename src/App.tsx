@@ -35,6 +35,7 @@ type Page = 'home' | 'catalog' | 'pdp' | 'terms' | 'privacy' | 'admin' | 'accoun
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [catalogCategory, setCatalogCategory] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<LuzHogarProduct | null>(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
@@ -44,6 +45,12 @@ export default function App() {
     { id: 1, name: 'Smart TV LG 55\'\' 4K UHD', price: 459.50, quantity: 1, image: 'https://images.unsplash.com/photo-1593359677770-4669502a35b0?auto=format&fit=crop&q=80&w=600', variant: 'Standard' },
   ]);
   
+  // Unified navigation handler — optionally pre-selects a catalog category
+  const handleNavigate = (page: Page, category?: string) => {
+    setCatalogCategory(page === 'catalog' ? (category ?? null) : null);
+    setCurrentPage(page);
+  };
+
   // Disable browser scroll restoration to prevent auto-scroll to previous position
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -159,17 +166,17 @@ export default function App() {
             transition={{ duration: 0.3 }}
             className="w-full relative overflow-x-hidden"
           >
-            <HeroSection onNavigate={setCurrentPage} />
-            <HeroWithMarquee onNavigate={setCurrentPage} />
-            <Cta4 onButtonClick={() => setCurrentPage('catalog')} />
+            <HeroSection onNavigate={handleNavigate} />
+            <HeroWithMarquee onNavigate={handleNavigate} />
+            <Cta4 onButtonClick={() => handleNavigate('catalog')} />
             <div id="ofertas-section">
-              <FeaturedProducts onNavigate={setCurrentPage} />
+              <FeaturedProducts onNavigate={handleNavigate} />
             </div>
 
             <div id="nosotros-section">
-              <AnimatedHeroSection onNavigate={setCurrentPage} />
+              <AnimatedHeroSection onNavigate={handleNavigate} />
             </div>
-            <CategoryGradientSection onNavigate={setCurrentPage} />
+            <CategoryGradientSection onNavigate={handleNavigate} />
             <RecentlyViewedProducts 
               onAddToCart={handleAddToCart} 
               onBuyNow={handleBuyNow}
@@ -226,6 +233,8 @@ export default function App() {
             transition={{ duration: 0.3 }}
           >
             <CatalogPage 
+              key={catalogCategory ?? 'all'}
+              initialCategory={catalogCategory}
               onAddToCart={handleAddToCart} 
               onBuyNow={handleBuyNow}
               onQuickView={handleQuickView} 
@@ -317,7 +326,7 @@ export default function App() {
       <Navbar 
         onOpenCart={() => setIsCartOpen(true)} 
         cartItemCount={cartItems.length} 
-        onNavigate={setCurrentPage}
+        onNavigate={handleNavigate}
       />
       
       <main className="flex-grow pt-[104px]">

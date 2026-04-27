@@ -7,7 +7,7 @@ import { LuzHogarProduct, luzHogarMockProducts } from '@/src/mockData';
 interface NavbarProps {
   onOpenCart: () => void;
   cartItemCount: number;
-  onNavigate?: (page: any) => void;
+  onNavigate?: (page: any, category?: string) => void;
 }
 
 export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: NavbarProps) {
@@ -74,10 +74,10 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
   };
 
   const desktopNavLinks = [
-    { name: 'GRAN ELECTRO', section: 'catalog', icon: <Monitor className="h-3.5 w-3.5" /> },
-    { name: 'IMAGEN Y SONIDO', section: 'catalog', icon: <Tv className="h-3.5 w-3.5" /> },
-    { name: 'PEQUEÑO ELECTRO', section: 'catalog', icon: <Zap className="h-3.5 w-3.5" /> },
-    { name: 'CLIMATIZACIÓN', section: 'catalog', icon: <Wind className="h-3.5 w-3.5" /> },
+    { name: 'GRAN ELECTRO', section: 'catalog', category: 'Gran Electro', icon: <Monitor className="h-3.5 w-3.5" /> },
+    { name: 'IMAGEN Y SONIDO', section: 'catalog', category: 'Imagen y Sonido', icon: <Tv className="h-3.5 w-3.5" /> },
+    { name: 'PEQUEÑO ELECTRO', section: 'catalog', category: 'Pequeño Electro', icon: <Zap className="h-3.5 w-3.5" /> },
+    { name: 'CLIMATIZACIÓN', section: 'catalog', category: 'Climatización', icon: <Wind className="h-3.5 w-3.5" /> },
   ];
 
   return (
@@ -111,7 +111,7 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
                   key={link.name}
                   onClick={() => {
                     if (link.section === 'catalog') {
-                      onNavigate?.('catalog');
+                      onNavigate?.('catalog', link.category);
                     } else {
                       handleScrollToSection(link.section);
                     }
@@ -255,7 +255,7 @@ export default function Navbar({ onOpenCart, cartItemCount, onNavigate }: Navbar
                     key={link.name}
                     onClick={() => { 
                       if (link.section === 'catalog') {
-                        onNavigate?.('catalog');
+                        onNavigate?.('catalog', link.category);
                       } else {
                         handleScrollToSection(link.section);
                       }
