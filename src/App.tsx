@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import CatalogPage from './components/CatalogPage';
@@ -44,8 +44,19 @@ export default function App() {
     { id: 1, name: 'Smart TV LG 55\'\' 4K UHD', price: 459.50, quantity: 1, image: 'https://images.unsplash.com/photo-1593359677770-4669502a35b0?auto=format&fit=crop&q=80&w=600', variant: 'Standard' },
   ]);
   
+  // Disable browser scroll restoration to prevent auto-scroll to previous position
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  // useLayoutEffect runs synchronously BEFORE the browser paints
+  // This ensures scroll is at top before the new page is visible
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }, [currentPage]);
 
   const handleUpdateQuantity = (id: number, delta: number) => {
